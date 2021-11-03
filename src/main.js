@@ -1,6 +1,13 @@
 // Este es el punto de entrada de tu aplicacion
-// Eventos de DOM.
+// import { myFunction } from './lib/index.js';
+import { showPage } from './views/routes.js';
 
-import { myFunction } from './lib/index.js';
+window.addEventListener('load', () => {
+  showPage(window.location.hash);
+});
 
-myFunction();
+window.addEventListener('hashchange', () => {
+  showPage(window.location.hash);
+});
+
+// myFunction();
