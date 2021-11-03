@@ -1,6 +1,5 @@
 // aqui exportaras las funciones que necesites
-
-export const myFunction = () => {
+import {showPages} from './routers.js'
+export const allPageshowPages() = hstion = () => {
   // aqui tu codigo
-  console.log('Hola mundo!');
-};
+  };
