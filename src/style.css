@@ -1,0 +1,20 @@
+/*Pagina login*/
+
+.logotype {
+    width: 23vw;
+}
+
+.backButton {
+width: 10%;
+}
+
+.newPostContent > input
+{
+    display: none;
+}
+
+.newPostContent img
+{
+    width: 80px;
+    cursor: pointer;
+}

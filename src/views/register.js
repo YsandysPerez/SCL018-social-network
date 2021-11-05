@@ -1,4 +1,7 @@
+import { createUser, inGoogle } from '../lib/firebase.js';
+
 export const registerPage = () => {
+  const containerRoot = document.getElementById('root');
   const resgisterSection = document.createElement('section');
   resgisterSection.className = 'resgisterSection';
 
@@ -14,9 +17,19 @@ export const registerPage = () => {
       </div>
       <div class='registerOption'>
       <p>Regístrate con</p>
-      <img src='./images/google.png id=googleLogo' class='googleLogo'>
+      <img src='./images/google.png' id='googleLogo' class='googleLogo'>
       </div>
       `;
   resgisterSection.innerHTML = register;
+  containerRoot.appendChild(resgisterSection);
+  document.getElementById('btnRegister').addEventListener('click', () => {
+    const newEmail = document.getElementById('resgiterEmail').value;
+    const newPass = document.getElementById('registerPassword').value;
+    createUser(newEmail, newPass);
+    // validUser(newEmail);
+  });
+  document.getElementById('googleLogo').addEventListener('click', () => {
+    inGoogle();
+  });
   return resgisterSection;
 };
