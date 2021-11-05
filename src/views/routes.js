@@ -1,4 +1,6 @@
 import { loginPage } from './login.js';
+// import { newPost } from './templateNewPost.js';
+// import { profilePage } from './profile.js';
 import { registerPage } from './register.js';
 
 export const showPage = (hash) => {
@@ -17,3 +19,10 @@ export const changeRouter = (hash) => {
   return showPage(hash);
 };
 */
+/* else if (hash === '#/newPost') {
+  containerRoot.appendChild(newPost());
+  // console.log('Login desde:' + hash);
+} */
+/* else if (hash === '#/profile') {
+    containerRoot.appendChild(profilePage());
+  } */

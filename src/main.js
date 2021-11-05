@@ -1,8 +1,6 @@
 // Este es el punto de entrada de tu aplicacion
-
 // import { myFunction } from './lib/index.js';
-
-import { showPage } from './views/routers.js';
+import { showPage } from './views/routes.js';
 
 window.addEventListener('load', () => {
   showPage(window.location.hash);
