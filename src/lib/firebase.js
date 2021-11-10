@@ -1,9 +1,6 @@
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from 'firebase/app';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-//import { getAnalytics } from 'firebase/analytics';
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, sendSignInLinkToEmail, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAKJpPxVNOXhZin5_nCQjc9B1VhBSlZ87E',
@@ -17,13 +14,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
-
-// Registrar al usuario
 export const auth = getAuth(app);
-console.log(app);
 const provider = new GoogleAuthProvider();
 
+// Registrar al usuario
 export const createUser = (email, password) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -64,40 +58,8 @@ onAuthStateChanged(auth, (user) => {
     // ...
   } 
 }); */
-/* const actionCodeSettings = {
-  // URL you want to redirect back to. The domain (www.example.com) for this
-  // URL must be in the authorized domains list in the Firebase Console.
-  url: 'https://social-network-book-love-20980.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
-  // This must be true.
-  handleCodeInApp: true,
-  iOS: {
-    bundleId: 'com.example.ios'
-  },
-  android: {
-    packageName: 'com.example.android',
-    installApp: true,
-    minimumVersion: '12'
-  },
-  dynamicLinkDomain: 'example.page.link'
-};
 
-// Verificación de Usuario
-export const validUser = () => {
-  sendSignInLinkToEmail(auth, email, actionCodeSettings)
-    .then(() => {
-    // The link was successfully sent. Inform the user.
-    // Save the email locally so you don't need to ask the user for it again
-    // if they open the link on the same device.
-      window.localStorage.setItem('emailForSignIn', email);
-      console.log('enviado');
-    // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    // ...
-    });
-}; */
+// Ingreso con Google
 export const inGoogle = () => {
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -118,3 +80,59 @@ export const inGoogle = () => {
     // ...
     });
 };
+
+const db = getFirestore(app);
+
+/* try {
+  const docRef = await addDoc(collection(db, "post"), {
+    first: "Ysa",
+    last: "Lovelace",
+    born: 1815
+  });
+  console.log("Document written with ID: ", docRef.id);
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
+try {
+  const docRef = await addDoc(collection(db, "users"), {
+    first: "Alan",
+    middle: "Mathison",
+    last: "Turing",
+    born: 1912
+  });
+
+  console.log("Document written with ID: ", docRef.id);
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
+const querySnapshot = await getDocs(collection(db, "users"));
+querySnapshot.forEach((doc) => {
+  console.log(`${doc.id} => ${doc.data()}`);
+}); */
+
+
+// Add a new document with a generated id.
+export async function addPost(variable) {
+  try {
+    const docRef = await addDoc(collection(db, 'post'), {
+      userPost: variable,
+    });
+    console.log('Document written with ID: ', docRef.id);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+}
+
+export async function publishPost(nameCollection) {
+  const arrayPost = [];
+  try {
+    const postCollection = await getDocs(collection(db, nameCollection));
+    postCollection.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data()}`);
+      arrayPost.push(doc.data());
+    });
+    console.log(arrayPost);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+}

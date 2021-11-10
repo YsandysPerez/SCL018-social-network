@@ -1,0 +1,57 @@
+@media screen and (min-width: 601px) and (orientation: portrait) {
+
+}
+
+/*Pagina registrarse*/
+@media screen and (max-width: 600px) and (orientation: portrait) {
+.resgisterSection {
+    display: flex;
+    background-color: rgba(0,0,0,.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+}
+.registerContainer {
+    background-color: #F2F2F2;
+    text-align: center;
+    width: 80%;
+}
+.regisLogo {
+    width: 100%;
+    height: 30%;
+    margin-bottom: 5vh;
+    margin-top: 3vh;
+}
+.logotypeRegis {
+    width: 80%;
+    height: auto;
+}
+.registerContainer .registerForm input {
+    width: 71%;
+    height: 30%;
+    text-align: center;
+    border:none;
+    border-bottom: 1px solid #87544E;
+    background: none;
+    margin-bottom: 5vh;
+    text-align: center;
+}
+
+::placeholder {
+    color: black;
+}
+.btnRegister {
+    width: 20vh;
+    height: 5vh;
+    border: 1px solid #87544E;
+    border-radius: 1vh;
+    font-size: 2.8vh;
+}
+.googleLogoReg {
+    margin-bottom: 1vh;
+}
+}

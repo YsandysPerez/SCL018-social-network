@@ -1,0 +1,74 @@
+body {
+    height: 100vh;
+
+}
+
+/* @media screen and (min-width: 601px) and (orientation: portrait) {} */
+
+/*Pagina login*/
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F2;
+}
+
+.loginSection{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 10vh;
+}
+
+.logo{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: 15vw;
+}
+
+.logotype {
+    width: 63vw;
+}
+
+.loginForm {
+    display: grid;
+    gap: 2vw;
+   /* height: 60%;*/
+    justify-items: center;
+    margin-bottom: 7vh;
+}
+
+.loginEmail,.loginPassword {
+    border:none;
+    border-bottom: 1px solid #87544E;
+    background: none;
+    text-align: center;
+    margin-bottom: 3vh;
+}
+
+::placeholder {
+    color: black;
+}
+
+.loginOption{
+    display: grid;
+    align-items: center;
+    justify-items: center;   
+}
+
+.googleLogo{
+    width: 10vh;
+    margin-bottom: 1vh;
+}
+
+.btnLogin{
+    width: 20vh;
+    height: 5vh;
+    border: 1px solid #87544E;
+    border-radius: 1vh;
+}
+}
