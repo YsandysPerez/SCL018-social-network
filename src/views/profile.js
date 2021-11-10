@@ -4,7 +4,7 @@ export const profilePage = () => {
 
   const profile = ` 
   <header class='profileHeader'>
-    <img src='./images/logo1.png' class = 'logotype'>
+    <img src='./images/logo2.png' class = 'logotypePro'>
   </header>
   <div>
   <img src='' alt='' class='profileImg' id='profileImg'>

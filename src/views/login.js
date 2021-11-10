@@ -5,8 +5,8 @@ export const loginPage = () => {
   const loginSection = document.createElement('section');
   loginSection.className = 'loginSection';
   const login = `
-    <div>
-        <img  src='./images/logo1.png' class = 'logotype'>   
+    <div class='logo'>
+        <img alt='logo login' src='./images/logo1.png' class = 'logotype'>   
     </div>
     <div class= 'loginForm'>
         <input type='email' id='loginEmail' class='loginEmail' placeholder='Correo electrónico'>
@@ -16,7 +16,7 @@ export const loginPage = () => {
     <div class='loginOption'>
         <p>Iniciar sesión con</p>
         <img src='./images/google.png' id='googleLogo' class='googleLogo'>
-        <div class='userReg'> ¿No tienes cuenta? <a href='#/register' id='userReg'>Registrate</a></div>
+        <div class='userReg'> ¿No tienes cuenta? <a href='#/register' id='userReg'> <strong>Registrate</strong></a></div>
     </div>
     `;
   loginSection.innerHTML = login;
