@@ -6,27 +6,28 @@ export const registerPage = () => {
   resgisterSection.className = 'resgisterSection';
 
   const register = `
-      <div>
-            <img  src='./images/logo1.png' class = 'logotype'>   
+    <div class= 'registerContainer'>
+      <div class= 'regisLogo'>
+            <img  src='./images/logo2.png' class = 'logotypeRegis'>   
       </div>
       <div class= 'registerForm'>
       <input type='text' id='userRegister' class='userRegister' placeholder='Usuario'>
       <input type='email' id='resgiterEmail' class='resgiterEmail' placeholder='Correo electrónico'>
       <input type='password'id='registerPassword' class='registerPassword' placeholder='Contraseña'>
-      <button class='btnRegister' id='btnRegister'>Regístrate</button>
+      <a href='#/'><button class='btnRegister' id='btnRegister'>Regístrate</button></a>
       </div>
       <div class='registerOption'>
       <p>Regístrate con</p>
-      <img src='./images/google.png' id='googleLogo' class='googleLogo'>
+      <img src='./images/google.png' id='googleLogo' class='googleLogoReg'>
       </div>
-      `;
+    </div>
+    `;
   resgisterSection.innerHTML = register;
   containerRoot.appendChild(resgisterSection);
   document.getElementById('btnRegister').addEventListener('click', () => {
     const newEmail = document.getElementById('resgiterEmail').value;
     const newPass = document.getElementById('registerPassword').value;
     createUser(newEmail, newPass);
-    // validUser(newEmail);
   });
   document.getElementById('googleLogo').addEventListener('click', () => {
     inGoogle();
