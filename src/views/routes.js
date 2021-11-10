@@ -3,6 +3,7 @@ import { newPost } from './componentes/NewPost.js';
 // import { profilePage } from './profile.js';
 import { registerPage } from './register.js';
 import { wall } from './nav.js';
+// noo
 
 export const showPage = (hash) => {
   const containerRoot = document.getElementById('root');
