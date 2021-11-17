@@ -12,7 +12,7 @@ export const newPost = () => {
     </header>
     <div class='desktopMain'>
     <div class='newPostTitle' id='newPostTitle'>
-      <img src='./images/backArrow.png' alt='volver' id='backButton' class='backButton'>
+      <a href='#/nav'><img src='./images/backArrow.png' alt='volver' id='backButton' class='backButton'></a>
       <img src='' alt='foto de perfil' id='newPostProfilePic' class='newPostProfilePic'>
       <p class='newPostUserName' id="newPostUserName"></p>
     </div>
@@ -33,6 +33,7 @@ export const newPost = () => {
   document.getElementById('publishBtn').addEventListener('click', () => {
     const contentPost = document.getElementById('newPostText').value;
     addPost(contentPost);
+    window.location.hash = '#/nav';
   });
 
   return containerNewPost;

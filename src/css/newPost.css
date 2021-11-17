@@ -73,4 +73,7 @@
     border: 1px solid #87544E;
     border-radius: 1vh;
 }
+a {
+    display: contents;   
+}
 }
