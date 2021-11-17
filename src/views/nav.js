@@ -1,22 +1,31 @@
-import { publishPost } from '../lib/firebase.js';
+// import { publishPost } from '../lib/firebase.js';
+import { showPost } from './components/TemplatePost.js';
+import { out } from '../lib/firebase.js';
 
 export const wall = () => {
+  const containerRoot = document.getElementById('root');
   const divWall = document.createElement('div');
   divWall.className = 'wall';
   const viewWall = `
-  <header> 
-    <img src='./images/logo2.png' class = 'logotypeWall' alt = 'logotype'>
-  </header>
-  <nav class = 'navWall'>
-    <img src="./images/home.png">
-    <img src="./images/newpost.png">
-    <img src="./images/getout.png">
+<header class='logotypeWall1'> 
+<img src='./images/logo2.png' class = 'logoWall' alt = 'logotype'>
+</header>
+<nav class = 'navWall'>
+    <a href='#/nav'><img class='icon' src="./images/home.png"></a>
+    <a href='#/newPost'><img class='icon' id='iconNewPost' src="./images/newpost.png"></a>
+    <img class='icon' id='iconOut' src="./images/getout.png">
   </nav>
-  <div>
-  
+  <div id='feed'>
   </div>
     `;
   divWall.innerHTML = viewWall;
-  publishPost('post');
+  containerRoot.appendChild(divWall);
+  showPost();
+  /* document.getElementById('iconNewPost').addEventListener('click', () => {
+    window.location.hash = '#/newPost';
+  }); */
+  document.getElementById('iconOut').addEventListener('click', () => {
+    out();
+  });
   return divWall;
 };
