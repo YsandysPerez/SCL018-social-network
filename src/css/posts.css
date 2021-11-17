@@ -1,0 +1,40 @@
+.allPost {
+    margin: 3vh 5vh;
+}
+
+.post {
+width: 100%;
+height: auto;
+/*margin-left: 4vh;*/
+border: 1px solid #87544E;
+background: #EDEAEA;
+box-shadow:  0 0px 5px 0 #87544E;
+border-radius: 1vh;
+word-break: break-all;
+}
+
+.feedPost{
+    display: flex;
+    padding: 1vh 2vh;    
+}
+
+.imgPost {
+    display: flex;
+    /*grid-template-columns: 1fr;
+    grid-template-rows: auto;*/
+    justify-content: space-around;
+    margin-top: 1vh;
+    width: 100%;   
+}
+
+.btnLike, .btnRecom {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.img {
+    height: 5vh;
+    padding-right: 2vh;
+    
+}

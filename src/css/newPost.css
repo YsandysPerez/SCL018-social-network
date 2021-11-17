@@ -1,0 +1,79 @@
+/* Para celular */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+.containerNewPost {
+    background: rgba(0,0,0,.3);
+    background-color: #F2F2F2;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+} 
+.desktopMain {
+    background: #F8F8F8;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 3px;
+	text-align: center;
+	width: 80%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.bookLovers {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #E8CEB0;
+    width: 100%;
+    margin-bottom: 5%;
+}
+.logotypeWall {
+    width: 60%;
+}
+.newPostTitle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+}
+.newPostTextInput {
+    width: 70vw;
+    height: 30vh;
+    border: none;
+}
+.imgPublic {
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    align-content: center ;
+    margin-top: 2vh;
+}
+.logotype {
+    width: 23vw;
+}
+.backButton {
+    width: 15%;
+}
+.newPostContent > input {
+    display: none;
+}
+.newPostContent img {
+    width: 80px;
+    cursor: pointer;
+}
+.postButton {
+    width: 20vh;
+    height: 5vh;
+    border: 1px solid #87544E;
+    border-radius: 1vh;
+}
+a {
+    display: contents;   
+}
+}

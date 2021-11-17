@@ -1,5 +1,13 @@
 // Este es el punto de entrada de tu aplicacion
-// prueba
-import { myFunction } from './lib/index.js';
+// import { myFunction } from './lib/index.js';
+import { showPage } from './views/routes.js';
+// import { firebaseInit } from './lib/farebase.js';
 
-myFunction();
+window.addEventListener('load', () => {
+  showPage(window.location.hash);
+});
+
+window.addEventListener('hashchange', () => {
+  showPage(window.location.hash);
+});
+// myFunction();
