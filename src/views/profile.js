@@ -1,4 +1,5 @@
 export const profilePage = () => {
+  const containerRoot = document.getElementById('root');
   const profileSection = document.createElement('section');
   profileSection.className = 'profileSection';
 
@@ -11,7 +12,8 @@ export const profilePage = () => {
   <h1 id="profileName" class="profileName">Nombre de usuario</h1>
   </div>
   <main id="profileContent" class="profileContent"></main>
-   `;
+  `;
   profileSection.innerHTML = profile;
+  containerRoot.appendChild(profileSection);
   return profileSection;
 };

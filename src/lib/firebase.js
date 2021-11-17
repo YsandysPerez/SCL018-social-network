@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAKJpPxVNOXhZin5_nCQjc9B1VhBSlZ87E',
@@ -15,7 +15,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
 
 // Registrar al usuario
 export const createUser = (email, password) => {
@@ -25,6 +24,19 @@ export const createUser = (email, password) => {
       const user = userCredential.user;
       console.log('Funcionó');
       // ...
+      if (user != null) {
+        sendEmailVerification(auth.currentUser)
+          .then(() => {
+            // onVerifyEmailSent();
+            // Email verification sent!
+            // ...
+            console.log('correo enviado!');
+            alert('Ingresa a tu correo y verifica tu email para poder acceder');
+          })
+          .catch((error) => {
+            console.log('correo NO enviado!');
+          });
+      }
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -32,6 +44,7 @@ export const createUser = (email, password) => {
       // ..
     });
 };
+
 // Ingresar al usuario
 export const loginUser = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
@@ -39,28 +52,37 @@ export const loginUser = (email, password) => {
     // Signed in
       const user = userCredential.user;
       console.log('si si si');
-    // ...
+      window.location.hash = '#/nav';
+      // ...
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      alert('por favor ingresa tus datos correctamente');
+      window.location.hash = '#/login';
     });
 };
-/* // Observador de datos del usuario
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  } 
-}); */
+export const onAuth = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log('auth: logeado');
+      // window.location.hash = '#/nav';
+      // ...
+    } else {
+      // User is signed out
+      // ...
+      console.log('no logeado');
+      window.location.hash = '#/login';
+    }
+  });
+};
 
 // Ingreso con Google
 export const inGoogle = () => {
+  const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
     .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -77,10 +99,9 @@ export const inGoogle = () => {
       const email = error.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+      // ...
     });
 };
-
 const db = getFirestore(app);
 
 /* try {
@@ -116,6 +137,7 @@ export async function addPost(variable) {
   try {
     const docRef = await addDoc(collection(db, 'post'), {
       userPost: variable,
+      datePost: Date(Date.now()),
     });
     console.log('Document written with ID: ', docRef.id);
   } catch (e) {
@@ -123,16 +145,33 @@ export async function addPost(variable) {
   }
 }
 
-export async function publishPost(nameCollection) {
-  const arrayPost = [];
-  try {
-    const postCollection = await getDocs(collection(db, nameCollection));
-    postCollection.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
-      arrayPost.push(doc.data());
+/* export async function publishPost(nameCollection) {
+      // const arrayPost = [];
+      try {
+        return await getDocs(collection(db, nameCollection));
+      //
+      // return postCollection;
+      } catch (e) {
+        console.error('Error adding document: ', e);
+      }
+} */
+export const publishPost = (nameCollection, callback) => {
+  const q = query(collection(db, nameCollection), orderBy('datePost', 'desc'));
+  onSnapshot(q, (querySnapshot) => {
+    const posts = [];
+    querySnapshot.forEach((doc) => {
+      posts.push(doc.data().userPost);
     });
-    console.log(arrayPost);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-}
+    callback(posts);
+    // console.log(posts);
+  });
+};
+
+export const out = () => {
+  const auth = getAuth();
+  signOut(auth).then(() => {
+    // Sign-out successful.
+  }).catch((error) => {
+    // An error happened.
+  });
+};
