@@ -7,8 +7,9 @@ function PostCallback(posts) {
     const postUser = document.createElement('div');
     postUser.innerHTML += `
     <div class='allPost'>
+    <div class ='name'>${element.userName}</div>
      <div class='post'>
-      <div class="feedPost"> ${element}</div>
+      <div class="feedPost"> ${element.userPost}</div>
      </div>
      <div class='imgPost'>
        <div class='btnLike'>
