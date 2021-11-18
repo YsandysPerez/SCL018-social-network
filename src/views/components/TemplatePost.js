@@ -1,8 +1,5 @@
 import { publishPost } from '../../lib/firebase.js';
 
-export const showPost = () => {
-  publishPost('post', PostCallback);
-};
 function PostCallback(posts) {
   const nav = document.getElementById('feed');
   nav.innerHTML = '';
@@ -10,8 +7,9 @@ function PostCallback(posts) {
     const postUser = document.createElement('div');
     postUser.innerHTML += `
     <div class='allPost'>
+    <div class ='name'>${element.userName}</div>
      <div class='post'>
-      <div class="feedPost"> ${element}</div>
+      <div class="feedPost"> ${element.userPost}</div>
      </div>
      <div class='imgPost'>
        <div class='btnLike'>
@@ -32,53 +30,6 @@ function PostCallback(posts) {
   return nav;
 }
 
-/*
 export const showPost = () => {
-  publishPost('post').then((post) => {
-    console.log(post);
-    const nav = document.getElementById('feed');
-    const postUser = document.createElement('div');
-    post.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().userPost}`);
-      postUser.innerHTML += `
-            <div class="post">
-              <div src='' class="cardImage"> ${doc.data().userPost}</div>
-            </div>
-            `;
-            nav.appendChild(postUser);
-    });
-  });
-}; 
-
-
-
-
-SOLUCION 2 
-
-export const showPost = () => {
-// const feedPost = publishPost('post');
-  const array = publishPost('post');
-  console.log(publishPost('post'))
-  const nav = document.getElementById('feed');
-  const postUser = document.createElement('div');
-  console.log(array);
-  // array.push(publishPost('post'));
-  array.forEach((doc) => {
-      postUser.innerHTML += `
-            <div class="post">
-              <div src='' class="cardImage"> ${doc.data().userPost}</div>
-            </div>
-            `;
-            nav.appendChild(array);
-  // array.push(publishPost('post'));
-    });
-
-    // console.log(`${doc.id} => ${doc.data().userPost}`);
-    // console.log(doc)
-
-       
-  }; 
-
-
-
-*/
+  publishPost('post', PostCallback);
+};

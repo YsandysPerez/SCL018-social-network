@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, sendEmailVerification, updateProfile } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -17,12 +17,15 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 // Registrar al usuario
-export const createUser = (email, password) => {
+export const createUser = (email, password, name) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log('Funcionó');
+      console.log(user);
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
       // ...
       if (user != null) {
         sendEmailVerification(auth.currentUser)
@@ -44,6 +47,36 @@ export const createUser = (email, password) => {
       // ..
     });
 };
+
+/* export const prueba = (name) => {
+  updateProfile(auth.currentUser, {
+    displayName: name,
+  }).then(() => {
+  // Profile updated!
+    // ...
+  }).catch((error) => {
+    // An error occurred
+    // ...
+  });
+}; */
+
+
+/* export const prueba = (name) => {
+  const user = auth.currentUser;
+  if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    const displayName = user.displayName;
+    const email = user.email;
+    const photoURL = user.photoURL;
+    const emailVerified = user.emailVerified;
+    console.log(displayName);
+    // The user's ID, unique to the Firebase project. Do NOT use
+    // this value to authenticate with your backend server, if
+    // you have one. Use User.getToken() instead.
+    const uid = user.uid;
+  }
+  console.log(user); 
+}; */
 
 // Ingresar al usuario
 export const loginUser = (email, password) => {
@@ -68,7 +101,7 @@ export const onAuth = () => {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
-      console.log('auth: logeado');
+      console.log(uid);
       // window.location.hash = '#/nav';
       // ...
     } else {
@@ -90,6 +123,7 @@ export const inGoogle = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      window.location.hash = '#/nav';
     // ...
     }).catch((error) => {
     // Handle Errors here.
@@ -99,6 +133,7 @@ export const inGoogle = () => {
       const email = error.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
+      window.location.hash = '#/login';
       // ...
     });
 };
@@ -133,9 +168,10 @@ querySnapshot.forEach((doc) => {
 
 
 // Add a new document with a generated id.
-export async function addPost(variable) {
+export const addPost = async (variable) => {
   try {
     const docRef = await addDoc(collection(db, 'post'), {
+      userName: auth.currentUser.displayName,
       userPost: variable,
       datePost: Date(Date.now()),
     });
@@ -160,12 +196,23 @@ export const publishPost = (nameCollection, callback) => {
   onSnapshot(q, (querySnapshot) => {
     const posts = [];
     querySnapshot.forEach((doc) => {
-      posts.push(doc.data().userPost);
+      posts.push(doc.data());
     });
     callback(posts);
     // console.log(posts);
   });
 };
+/* export const readData = (posts, callback) => {
+  const q = query(collection(db, posts), orderBy("posts", "desc"));
+  onSnapshot(q, (querySnapshot) => {
+    const postContent = [];
+    querySnapshot.forEach((doc) => {
+      postContent.push(doc.data());
+    });
+    callback(postContent);
+    console.log("posts","datepost",'name',postContent.join(", "));
+  });
+}; */
 
 export const out = () => {
   const auth = getAuth();
@@ -175,3 +222,4 @@ export const out = () => {
     // An error happened.
   });
 };
+

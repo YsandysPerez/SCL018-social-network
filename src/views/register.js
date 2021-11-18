@@ -27,7 +27,8 @@ export const registerPage = () => {
   document.getElementById('btnRegister').addEventListener('click', () => {
     const newEmail = document.getElementById('resgiterEmail').value;
     const newPass = document.getElementById('registerPassword').value;
-    createUser(newEmail, newPass);
+    const newName = document.getElementById('userRegister').value;
+    createUser(newEmail, newPass, newName);
   });
   document.getElementById('googleLogo').addEventListener('click', () => {
     inGoogle();
