@@ -99,6 +99,7 @@ export const loginUser = (email, password) => {
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
+      // console.log('si si si');
       window.location.hash = '#/nav';
       // ...
     })
@@ -139,6 +140,7 @@ export const inGoogle = () => {
       // The signed-in user info.
       const user = result.user;
       window.location.hash = '#/nav';
+      console.log('logeada con google');
     // ...
     }).catch((error) => {
     // Handle Errors here.
