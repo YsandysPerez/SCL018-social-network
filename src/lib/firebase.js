@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, sendEmailVerification, updateProfile } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, orderBy, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAKJpPxVNOXhZin5_nCQjc9B1VhBSlZ87E',
@@ -15,24 +15,69 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+const db = getFirestore(app);
 
-// Registrar al usuario
+// Función para crear la colección user-id
+export const addUserData = async (userId, variable) => {
+  try {
+    const docRef = await addDoc(collection(db, 'user-data'), {
+      id: userId,
+      name: variable,
+      // like: [],
+      // recommended: [],
+    });
+    console.log('Document written with ID: ', docRef.id);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
+
+// Función para crear la colección post
+export const addPost = async (variable) => {
+  try {
+    const docRef = await addDoc(collection(db, 'post'), {
+      userName: auth.currentUser.displayName,
+      userId: auth.currentUser.uid,
+      userPost: variable,
+      datePost: Date(Date.now()),
+      // like: [],
+      // recommended: [],
+    });
+    console.log('Document written with ID: ', docRef.id);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
+
+// Función para crear cuenta de usuario
 export const createUser = (email, password, name) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log(user);
+      console.log(userCredential);
       updateProfile(auth.currentUser, {
         displayName: name,
       });
       // ...
+      addUserData(auth.currentUser.uid, name);
       if (user != null) {
         sendEmailVerification(auth.currentUser)
           .then(() => {
             // onVerifyEmailSent();
             // Email verification sent!
             // ...
+            // console.log(auth.currentUser.uid);
+            // addUserData(auth.currentUser.uid, name);
+            // Arreglo temporal
+            /* const docRef = addDoc(collection(db, 'user-data'), {
+              id: auth.currentUser.uid,
+              userName: name,
+              // like: [],
+              // recommended: [],
+            }); */
+
+            // addUserData(auth.currentUser.id, name);
             console.log('correo enviado!');
             alert('Ingresa a tu correo y verifica tu email para poder acceder');
           })
@@ -48,43 +93,13 @@ export const createUser = (email, password, name) => {
     });
 };
 
-/* export const prueba = (name) => {
-  updateProfile(auth.currentUser, {
-    displayName: name,
-  }).then(() => {
-  // Profile updated!
-    // ...
-  }).catch((error) => {
-    // An error occurred
-    // ...
-  });
-}; */
-
-
-/* export const prueba = (name) => {
-  const user = auth.currentUser;
-  if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-    const emailVerified = user.emailVerified;
-    console.log(displayName);
-    // The user's ID, unique to the Firebase project. Do NOT use
-    // this value to authenticate with your backend server, if
-    // you have one. Use User.getToken() instead.
-    const uid = user.uid;
-  }
-  console.log(user); 
-}; */
-
 // Ingresar al usuario
 export const loginUser = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
-      console.log('si si si');
+      // console.log('si si si');
       window.location.hash = '#/nav';
       // ...
     })
@@ -95,13 +110,14 @@ export const loginUser = (email, password) => {
       window.location.hash = '#/login';
     });
 };
+// función observador
 export const onAuth = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log(uid);
+      const userId = user.uid;
+      // console.log(userId);
       // window.location.hash = '#/nav';
       // ...
     } else {
@@ -137,85 +153,39 @@ export const inGoogle = () => {
       // ...
     });
 };
-const db = getFirestore(app);
-
-/* try {
-  const docRef = await addDoc(collection(db, "post"), {
-    first: "Ysa",
-    last: "Lovelace",
-    born: 1815
-  });
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
-try {
-  const docRef = await addDoc(collection(db, "users"), {
-    first: "Alan",
-    middle: "Mathison",
-    last: "Turing",
-    born: 1912
-  });
-
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
-const querySnapshot = await getDocs(collection(db, "users"));
-querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
-}); */
-
-
-// Add a new document with a generated id.
-export const addPost = async (variable) => {
-  try {
-    const docRef = await addDoc(collection(db, 'post'), {
-      userName: auth.currentUser.displayName,
-      userPost: variable,
-      datePost: Date(Date.now()),
+// función para publicar nombre de usuarios
+export const getCurrentUserData = (callback) => {
+  const q = query(collection(db, 'user-data'));
+  onSnapshot(q, (querySnapshot) => {
+    const postsName = [];
+    querySnapshot.forEach((doc) => {
+      postsName.push(doc.data());
     });
-    console.log('Document written with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-}
-
-/* export async function publishPost(nameCollection) {
-      // const arrayPost = [];
-      try {
-        return await getDocs(collection(db, nameCollection));
-      //
-      // return postCollection;
-      } catch (e) {
-        console.error('Error adding document: ', e);
-      }
-} */
+    callback(postsName);
+    console.log(postsName);
+  });
+};
+// función para publicar el post en pantalla
 export const publishPost = (nameCollection, callback) => {
   const q = query(collection(db, nameCollection), orderBy('datePost', 'desc'));
   onSnapshot(q, (querySnapshot) => {
     const posts = [];
-    querySnapshot.forEach((doc) => {
-      posts.push(doc.data());
+    console.log(querySnapshot);
+    querySnapshot.forEach((_doc) => {
+      console.log(_doc.id);
+      /* element['data'] = _doc.data();
+      element['data']['id'] = _doc.id; */
+      // posts.push(doc.data());
+      console.log(_doc.id);
+      console.log(_doc.data());
+      posts.push({ ..._doc.data(), id: _doc.id });
+      console.log(posts);
     });
     callback(posts);
-    // console.log(posts);
   });
 };
-/* export const readData = (posts, callback) => {
-  const q = query(collection(db, posts), orderBy("posts", "desc"));
-  onSnapshot(q, (querySnapshot) => {
-    const postContent = [];
-    querySnapshot.forEach((doc) => {
-      postContent.push(doc.data());
-    });
-    callback(postContent);
-    console.log("posts","datepost",'name',postContent.join(", "));
-  });
-}; */
-
+// función para cerrar sesión
 export const out = () => {
-  const auth = getAuth();
   signOut(auth).then(() => {
     // Sign-out successful.
   }).catch((error) => {
@@ -223,3 +193,11 @@ export const out = () => {
   });
 };
 
+// función para eliminar post
+export const deletePost = async (postId) => {
+  console.log(postId);
+  const isConfirm = window.confirm('¿Seguro quieres eliminar tu post?');
+  if (isConfirm) {
+    await deleteDoc(doc(db, 'post', postId));
+  }
+};

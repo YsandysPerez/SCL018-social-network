@@ -1,6 +1,7 @@
 // import { publishPost } from '../lib/firebase.js';
 import { showPost } from './components/TemplatePost.js';
 import { out } from '../lib/firebase.js';
+import { newPost } from './components/NewPost.js';
 
 export const wall = () => {
   const containerRoot = document.getElementById('root');
@@ -12,7 +13,9 @@ export const wall = () => {
 </header>
 <nav class = 'navWall'>
     <a href='#/nav'><img class='icon' src="./images/home.png"></a>
-    <a href='#/newPost'><img class='icon' id='iconNewPost' src="./images/newpost.png"></a>
+  	<label for="btn-modal" class="lbl-modal">
+       <img class='icon' id='iconNewPost' src="./images/newpost.png">
+    </label>
     <img class='icon' id='iconOut' src="./images/getout.png">
   </nav>
   <div id='feed'>
@@ -20,6 +23,8 @@ export const wall = () => {
     `;
   divWall.innerHTML = viewWall;
   containerRoot.appendChild(divWall);
+  containerRoot.appendChild(newPost());
+
   showPost();
   /* document.getElementById('iconNewPost').addEventListener('click', () => {
     window.location.hash = '#/newPost';
@@ -27,5 +32,6 @@ export const wall = () => {
   document.getElementById('iconOut').addEventListener('click', () => {
     out();
   });
+ 
   return divWall;
 };
