@@ -27,7 +27,7 @@ word-break: break-all;
     width: 100%;   
 }
 
-.btnLike, .btnRecom {
+.btnLike, .btnRecom, .btnDelete {
     display: flex;
     flex-direction: row;
     
