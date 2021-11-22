@@ -1,15 +1,9 @@
-@media screen and (max-width: 600px) and (orientation: portrait) {
 .logotypeWall1{
 width: 100%;
 background: #E8CEB0;
 display: flex;
 justify-content: center;
 }
-
-.logoWall{
-    width: 60%;
-}
-
 .navWall{
 background: #F3E6D8;
 display: flex;
@@ -17,8 +11,22 @@ justify-content: space-around;
 padding-top: 1vh;
 padding-bottom: 1vh;
 }
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+.logoWall{
+    width: 60%;
+}
 
 .icon{
     height: 8vw;
 }
+}
+
+@media screen and (min-width: 600px) {
+    .logoWall{
+        width: 20%;
+    }
+    .icon{
+        height: 2vw;
+    }
 }
