@@ -99,6 +99,7 @@ export const loginUser = (email, password) => {
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
+
       // console.log('si si si');
       window.location.hash = '#/nav';
       // ...
