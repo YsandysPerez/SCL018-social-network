@@ -1,13 +1,5 @@
-@media screen and (min-width: 601px) and (orientation: portrait) {
-
-}
-
-/*Pagina registrarse*/
-@media screen and (max-width: 600px) and (orientation: portrait) {
 .resgisterSection {
-    display: flex;
-    background-color: rgba(0,0,0,.3);
-    position: fixed;
+    display: flex; 
     top: 0;
     bottom: 0;
     left: 0;
@@ -15,43 +7,122 @@
     justify-content: center;
     align-items: center;
 }
-.registerContainer {
-    background-color: #F2F2F2;
-    text-align: center;
-    width: 80%;
-}
-.regisLogo {
-    width: 100%;
-    height: 30%;
-    margin-bottom: 5vh;
-    margin-top: 3vh;
-}
-.logotypeRegis {
-    width: 80%;
+
+.desktopRegister {
+    display: flex;
+    position: fixed;
+	width: 60%;
     height: auto;
+	transition: all 500ms ease;
+	opacity: 0;
+	visibility: hidden;
+	background: rgba(0,0,0,.3);
+    margin-top: 90vh;
+    border-radius: 2vw;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-moda:checked ~ .desktopRegister{
+	opacity: 1;
+	visibility: visible;
+} 
+
+.registerContainer {
+ background-color: #F2F2F2;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    box-shadow: 1px 7px 25px rgba(0,0,0,0.6);
+	transition: all 500ms ease;
+	position: relative;
+	transform: translateY(-30%);
+    border-radius: 2vw;
+}
+
+#btn-moda:checked ~ .desktopRegister .registerContainer{
+	transform: translateY(0%);
+} 
+
+
+.registerContainer label {
+    position: absolute;
+	right: -8vw;
+	color: black;
+	font-size: 15px;
+	cursor: pointer;
+    font-family: sans-serif;
+    
+}
+
+#btn-moda{
+	visibility: hidden;
+    display: none;
+}
+
+.lbl-moda{
+	border-radius: 4px;
+	cursor: pointer;
+    width: auto;
+    height: auto;
+    
 }
 .registerContainer .registerForm input {
-    width: 71%;
-    height: 30%;
+    width: 70%;
     text-align: center;
     border:none;
     border-bottom: 1px solid #87544E;
     background: none;
     margin-bottom: 5vh;
-    text-align: center;
+    display: grid;
+    margin-left: 10vw;
+    margin-right: 10vw;
 }
 
-::placeholder {
-    color: black;
+.regisLogo {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 .btnRegister {
     width: 20vh;
     height: 5vh;
     border: 1px solid #87544E;
     border-radius: 1vh;
-    font-size: 2.3vh;
+    font-size: 2.3vh;  
+    margin-left: 2.2vw;
 }
 .googleLogoReg {
     margin-bottom: 1vh;
 }
+
+
+/*Pagina registrarse*/
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+
+
+.logotypeRegis {
+    width: 80%;
+    
+}
+
+
+::placeholder {
+    color: black;
+}
+
+
+}
+
+@media screen and (min-width: 600px) {
+
+    .regisLogo {
+        width: 100%;
+        
+    }
+    .logotypeRegis {
+        width: 60%;
+        height: auto;
+    }
+
 }

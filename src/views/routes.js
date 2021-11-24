@@ -2,7 +2,6 @@ import { loginPage } from './login.js';
 import { newPost } from './components/NewPost.js';
 import { registerPage } from './register.js';
 import { wall } from './nav.js';
-import { profilePage } from './profile.js';
 
 export const showPage = (hash) => {
   const containerRoot = document.getElementById('root');
@@ -15,7 +14,5 @@ export const showPage = (hash) => {
     containerRoot.appendChild(newPost());
   } else if (hash === '#/nav') {
     containerRoot.appendChild(wall());
-  } else if (hash === '#/profile') {
-    containerRoot.appendChild(profilePage());
   }
 };

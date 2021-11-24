@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, sendEmailVerification, updateProfile } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, onSnapshot, orderBy, doc, deleteDoc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAKJpPxVNOXhZin5_nCQjc9B1VhBSlZ87E',
@@ -15,33 +15,58 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+const db = getFirestore(app);
 
-// Registrar al usuario
-export const createUser = (email, password) => {
+// Función para crear la colección user-id
+export const addUserData = async (userId, variable) => {
+  try {
+    const docRef = await addDoc(collection(db, 'user-data'), {
+      id: userId,
+      name: variable,
+    });
+    console.log('Document written with ID: ', docRef.id);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
+
+// Función para crear la colección post
+export const addPost = async (variable) => {
+  try {
+    const docRef = await addDoc(collection(db, 'post'), {
+      userName: auth.currentUser.displayName,
+      userId: auth.currentUser.uid,
+      userPost: variable,
+      datePost: Timestamp.fromDate(new Date()),
+    });
+    console.log('Document written with ID: ', docRef.id);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
+
+// Función para crear cuenta de usuario
+export const createUser = (email, password, name) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
       const user = userCredential.user;
-      console.log('Funcionó');
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
       // ...
+      addUserData(auth.currentUser.uid, name);
       if (user != null) {
         sendEmailVerification(auth.currentUser)
           .then(() => {
-            // onVerifyEmailSent();
-            // Email verification sent!
-            // ...
-            console.log('correo enviado!');
             alert('Ingresa a tu correo y verifica tu email para poder acceder');
           })
           .catch((error) => {
-            console.log('correo NO enviado!');
           });
       }
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // ..
     });
 };
 
@@ -49,11 +74,8 @@ export const createUser = (email, password) => {
 export const loginUser = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-    // Signed in
       const user = userCredential.user;
-      console.log('si si si');
       window.location.hash = '#/nav';
-      // ...
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -62,20 +84,27 @@ export const loginUser = (email, password) => {
       window.location.hash = '#/login';
     });
 };
+// función para cerrar sesión
+export const out = () => {
+  signOut(auth)
+    .then(() => {
+      window.location.hash = '#/login';
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// función observador
 export const onAuth = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log('auth: logeado');
-      // window.location.hash = '#/nav';
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      console.log('no logeado');
-      window.location.hash = '#/login';
+      window.location.hash = '#/nav';
+      const userId = user.uid;
+    } else if (!user) {
+      if (window.location.hash !== '#/register') {
+        out();
+      }
     }
   });
 };
@@ -85,93 +114,60 @@ export const inGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
     .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      // The signed-in user info.
       const user = result.user;
-    // ...
+      window.location.hash = '#/nav';
     }).catch((error) => {
-    // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
       const email = error.email;
-      // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
+      window.location.hash = '#/login';
     });
 };
-const db = getFirestore(app);
-
-/* try {
-  const docRef = await addDoc(collection(db, "post"), {
-    first: "Ysa",
-    last: "Lovelace",
-    born: 1815
-  });
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
-try {
-  const docRef = await addDoc(collection(db, "users"), {
-    first: "Alan",
-    middle: "Mathison",
-    last: "Turing",
-    born: 1912
-  });
-
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
-const querySnapshot = await getDocs(collection(db, "users"));
-querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
-}); */
-
-
-// Add a new document with a generated id.
-export async function addPost(variable) {
-  try {
-    const docRef = await addDoc(collection(db, 'post'), {
-      userPost: variable,
-      datePost: Date(Date.now()),
+// función para publicar nombre de usuarios
+export const getCurrentUserData = (callback) => {
+  const q = query(collection(db, 'user-data'));
+  onSnapshot(q, (querySnapshot) => {
+    const postsName = [];
+    querySnapshot.forEach((doc) => {
+      postsName.push(doc.data());
     });
-    console.log('Document written with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-}
-
-/* export async function publishPost(nameCollection) {
-      // const arrayPost = [];
-      try {
-        return await getDocs(collection(db, nameCollection));
-      //
-      // return postCollection;
-      } catch (e) {
-        console.error('Error adding document: ', e);
-      }
-} */
+    callback(postsName);
+  });
+};
+// función para publicar el post en pantalla
 export const publishPost = (nameCollection, callback) => {
   const q = query(collection(db, nameCollection), orderBy('datePost', 'desc'));
   onSnapshot(q, (querySnapshot) => {
     const posts = [];
-    querySnapshot.forEach((doc) => {
-      posts.push(doc.data().userPost);
+    querySnapshot.forEach((_doc) => {
+      posts.push({ ..._doc.data(), id: _doc.id });
     });
     callback(posts);
-    // console.log(posts);
   });
 };
 
-export const out = () => {
-  const auth = getAuth();
-  signOut(auth).then(() => {
-    // Sign-out successful.
-  }).catch((error) => {
-    // An error happened.
-  });
+// función para eliminar post
+export const deletePost = async (postId) => {
+  const isConfirm = window.confirm('¿Seguro quieres eliminar tu post?');
+  if (isConfirm) {
+    await deleteDoc(doc(db, 'post', postId));
+  }
+};
+
+// Para editar Post
+export const editTemplate = async (postId) => {
+  const isConfirm = window.confirm('¿Seguro quieres editar tu post?');
+  if (isConfirm) {
+    const postEdit = doc(db, 'post', postId);
+    await updateDoc(postEdit, {
+      userName: auth.currentUser.displayName,
+      userId: auth.currentUser.uid,
+      idPost: postId,
+      userPost: document.getElementById('textPostInputEdit').value,
+    });
+    window.location.reload();
+  }
 };
