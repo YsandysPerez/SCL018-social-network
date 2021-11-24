@@ -8,21 +8,16 @@ export const newPost = () => {
 
   const newAddPost = `
   <input type="checkbox" id="btn-modal">
-  <div class='desktopMain' id='desktopMain'>
-    <div class='contentModal'>
-      <div class='newPostTitle' id='newPostTitle'>
-        <label for="btn-modal"><img src='./images/backArrow.png' alt='volver' id='backButton' class='backButton'></label>
-        <img src='' alt='foto de perfil' id='newPostProfilePic' class='newPostProfilePic'>
-        <p class='newPostUserName' id="newPostUserName"></p>
+  <div class="desktopMain" id="desktopMain">
+    <div class="contentModal">
+      <div class="newPostTitle" id="newPostTitle">
+        <label for="btn-modal"><img src="./images/backArrow.png" alt="volver" id="backButton" class="backButton"></label>
+        <p class="newPostUserName" id="newPostUserName"></p>
       </div>
-      <div class='newPostContent'>
-        <input type='file' id='newPostImgFile' class='inputFileNewPost' value=''>
-        <textarea id='newPostText' name='newPostText' class='newPostTextInput' rows='10'cols='25' placeholder='Escribe aquí tu mensaje..'></textarea>
-        <div class= 'imgPublic'>
-          <label for='newPostImgFile'> 
-          <img class='addImg' src='./images/addImg.png'>
-          </label> 
-          <input type='submit' value='Publicar' class='postButton' id='publishBtn'>
+      <div class="newPostContent">
+        <textarea id="newPostText" name="newPostText" class="newPostTextInput" rows="10"cols="25" placeholder="Escribe aquí tu mensaje.."></textarea>
+        <div class= "imgPublic">
+          <input type="submit" value="Publicar" class="postButton" id="publishBtn">
         </div>
       </div>
     </div>
@@ -31,12 +26,10 @@ export const newPost = () => {
   containerNewPost.innerHTML = newAddPost;
   containerRoot.appendChild(containerNewPost);
 
-document.getElementById('publishBtn').addEventListener('click', () => {
-  const contentPost = document.getElementById('newPostText').value;
-  addPost(contentPost);
-  window.location.hash = '#/nav';
-});
- 
+  document.getElementById('publishBtn').addEventListener('click', () => {
+    const contentPost = document.getElementById('newPostText').value;
+    addPost(contentPost);
+    window.location.hash = '#/nav';
+  });
   return containerNewPost;
 };
-
