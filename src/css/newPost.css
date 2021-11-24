@@ -13,14 +13,14 @@
 .desktopMain {
     display: flex;
     position: fixed;
-	width: 60%;
+	width: 50%;
     height: auto;
 	transition: all 500ms ease;
 	opacity: 0;
 	visibility: hidden;
     border-radius: 2vw;
 	background: rgba(0,0,0,.3);
-    margin-top: 70vw;
+    margin-top: 75vh;
     justify-content: center;
     align-items: center;
 }
@@ -68,8 +68,10 @@
 }
 
 .backButton {
-    width: 40%;
+    width: 15%;
     display: flex;
+    position: fixed;
+    margin-left: 3vw;
 }
 
 .newPostTitle {
@@ -81,7 +83,7 @@
     width: 100%;
 }
 .newPostTextInput {
-    width: 87%;
+    width: 77%;
     height: 20vh;
     border: none;
     padding: 0%;
@@ -128,6 +130,10 @@ label{
 /* Para celular */
 @media screen and (max-width: 600px) and (orientation: portrait) {
 
+.backButton {
+  width: 25%;
+  margin-left: 3vw;
+}
 
 
 
