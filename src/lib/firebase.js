@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, sendEmailVerification, updateProfile } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, query, onSnapshot, orderBy, doc, deleteDoc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, query, onSnapshot, orderBy, doc, deleteDoc, updateDoc, Timestamp, getDoc, arrayRemove, arrayUnion } from "https://www.gstatic.com/firebasejs/9.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAKJpPxVNOXhZin5_nCQjc9B1VhBSlZ87E',
@@ -37,6 +37,10 @@ export const addPost = async (variable) => {
       userName: auth.currentUser.displayName,
       userId: auth.currentUser.uid,
       userPost: variable,
+      likes: [],
+      recom: [],
+      likesCounter: 0,
+      recomCounter: 0,
       datePost: Timestamp.fromDate(new Date()),
     });
     console.log('Document written with ID: ', docRef.id);
@@ -126,17 +130,7 @@ export const inGoogle = () => {
       window.location.hash = '#/login';
     });
 };
-// función para publicar nombre de usuarios
-export const getCurrentUserData = (callback) => {
-  const q = query(collection(db, 'user-data'));
-  onSnapshot(q, (querySnapshot) => {
-    const postsName = [];
-    querySnapshot.forEach((doc) => {
-      postsName.push(doc.data());
-    });
-    callback(postsName);
-  });
-};
+
 // función para publicar el post en pantalla
 export const publishPost = (nameCollection, callback) => {
   const q = query(collection(db, nameCollection), orderBy('datePost', 'desc'));
@@ -168,6 +162,43 @@ export const editTemplate = async (postId) => {
       idPost: postId,
       userPost: document.getElementById('textPostInputEdit').value,
     });
-    window.location.reload();
+  }
+};
+
+export const updateLikes = async (id, userIdentifier) => {
+  const postRef = doc(db, 'post', id);
+  const docSnap = await getDoc(postRef);
+  const postData = docSnap.data();
+  const likesCount = postData.likesCounter;
+
+  if ((postData.likes).includes(userIdentifier)) {
+    await updateDoc(postRef, {
+      likes: arrayRemove(userIdentifier),
+      likesCounter: likesCount - 1,
+    });
+  } else {
+    await updateDoc(postRef, {
+      likes: arrayUnion(userIdentifier),
+      likesCounter: likesCount + 1,
+    });
+  }
+};
+
+export const updateRecom = async (id, userIdentifier) => {
+  const postRef = doc(db, 'post', id);
+  const docSnap = await getDoc(postRef);
+  const postData = docSnap.data();
+  const recomCount = postData.recomCounter;
+
+  if ((postData.recom).includes(userIdentifier)) {
+    await updateDoc(postRef, {
+      recom: arrayRemove(userIdentifier),
+      recomCounter: recomCount - 1,
+    });
+  } else {
+    await updateDoc(postRef, {
+      recom: arrayUnion(userIdentifier),
+      recomCounter: recomCount + 1,
+    });
   }
 };

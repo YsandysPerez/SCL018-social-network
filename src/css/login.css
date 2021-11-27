@@ -1,6 +1,7 @@
 body {
     height: 100vh;
     background-color: #F2F2F2;
+    font-family: 'Quicksand', sans-serif;  
 }
 
 /* @media screen and (min-width: 601px) and (orientation: portrait) {} */
@@ -48,10 +49,12 @@ body {
     background: none;
     text-align: center;
     margin-bottom: 3vh;
+    font-family: 'Quicksand', sans-serif;  
 }
 
 ::placeholder {
     color: black;
+    font-family: 'Quicksand', sans-serif;  
 }
 
 .loginOption{
@@ -70,6 +73,7 @@ body {
     height: 5vh;
     border: 1px solid #87544E;
     border-radius: 1vh;
+    font-family: 'Quicksand', sans-serif;  
 }
 }
 
@@ -79,7 +83,7 @@ body {
 
     .loginSection{
         width: 100%;
-        height: 100%;
+        height: 100vh;
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: 2fr;
@@ -117,10 +121,12 @@ body {
     background: none;
     text-align: center;
     margin-bottom: 3vh;
+    font-family: 'Quicksand', sans-serif;  
 }
 
 ::placeholder {
     color: black;
+    font-family: 'Quicksand', sans-serif;  
 }
 
 .loginOption{
@@ -140,5 +146,6 @@ body {
     border: 1px solid #87544E;
     border-radius: 1vh;
    margin-left: 8vw;
+   font-family: 'Quicksand', sans-serif;  
 }
 }
