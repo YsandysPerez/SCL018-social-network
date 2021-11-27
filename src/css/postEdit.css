@@ -1,0 +1,128 @@
+.boton-mod{
+    padding: 40px;
+}
+
+#btn-mod{
+    display: none;
+}
+
+.containerEdit{
+	width: 100%;
+    height:100vh;
+    position: fixed;
+    top: 0; left: 0;
+    background-color: rgba(0,0,0,.3);
+    justify-content: center;
+    align-items: center;
+	transition: all 500ms ease;
+	display: flex;
+}
+
+/*#btn-mod:checked ~ .containerEdit{
+    display: flex;
+}*/
+
+.modal-header{
+    width: 40%;
+    background-color: #F2F2F2;
+    border-radius: 1vh;
+	box-shadow: 1px 7px 25px rgba(0,0,0,0.6);
+	transition: all 500ms ease;
+	position: absolute;
+	transform: translateY(-30%);
+}
+
+#btn-mod:checked ~ .containerEdit {
+	visibility: hidden;
+    display: none;
+}
+
+.modal-header .btn-cerrar {
+	width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.modal-header .btn-cerrar label{
+    font-family: sans-serif;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 300ms ease;
+	margin-right: 1vw;
+	margin-top: 1vh;
+}
+
+
+.cerrar-modal{
+    width:100%;
+    height: 100vh;
+    position: absolute;
+    top:0; left: 0;
+    z-index: -1;
+}
+
+.textPostInputEdit {
+	width: 85%;
+    height: auto;
+    border: none;
+    display: flex;
+    justify-content: center;
+    background: #F3E6D8;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    padding: 2vw;
+	margin-bottom: 2vh;
+    box-shadow: 1px 0.5px 25px rgba(99, 76, 76, 0.6);
+    border-radius: 0.5vw;
+}
+
+
+.editIntro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.textIntro{
+    margin: 0%;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 1vh;
+    background: #E8CEB0;
+    width: 40%;
+    box-shadow: 1px 0.5px 25px hsla(0, 10%, 58%, 0.6);
+    border-radius: 0.5vw;
+    font-size: 18px;
+}
+
+.btnSave {
+	display: flex;
+	width: 75%;
+	justify-content: center;
+}
+
+.btnPostEdit {
+    border: 1px solid #87544E;
+    border-radius: 1vh;
+	justify-content: center;
+	margin-left: 35%;
+	margin-bottom: 2vh;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+.textPostInputEdit {
+    margin-left: 2vw;
+}
+
+
+.modal-header{
+    width: 50%;
+
+}
+ .textIntro{
+    width: 60%;
+ }   
+}

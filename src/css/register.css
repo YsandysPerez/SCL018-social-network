@@ -47,7 +47,7 @@
 
 .registerContainer label {
     position: absolute;
-	right: -8vw;
+	right: 2vw;
 	color: black;
 	font-size: 15px;
 	cursor: pointer;
@@ -111,6 +111,9 @@
     color: black;
 }
 
+.btnRegister{
+    margin-bottom: 1vh;
+}
 
 }
 
@@ -124,5 +127,7 @@
         width: 60%;
         height: auto;
     }
-
+    .btnRegister{
+        margin-bottom: 1vh;
+    }
 }

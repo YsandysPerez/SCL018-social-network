@@ -11,11 +11,14 @@ export const wall = () => {
 <img src="./images/logo2.png" class = "logoWall" alt = "logotype">
 </header>
 <nav class = "navWall">
-    <a href="#/nav"><img class="icon" src="./images/home.png"></a>
+    <a href="#/nav"><img class="icon" src="./images/home.png"></a> 
+       <p class="homeText"> Home </p>
     <label for="btn-modal" class="lbl-modal">
        <img class="icon" id="iconNewPost" src="./images/newpost.png">
     </label>
+    <p class="homeText"> Nuevo post </p>
     <img class="icon" id="iconOut" src="./images/getout.png">
+    <p class="homeText"> Salir </p>
   </nav>
   <div id="feed">
   </div>

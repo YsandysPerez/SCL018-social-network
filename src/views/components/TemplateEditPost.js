@@ -1,18 +1,22 @@
 export const editPost = () => {
-  const editPostTemplate = `<div class="containerEdit" id="containerEdit"> 
-    <div class="modal-header">
-    <div class="postEdit">     
+  const editPostTemplate = `
+  <input type="checkbox" id="btn-mod">
+  <div class="containerEdit" id="containerEdit"> 
+    <div class="modal-header">    
                   <form id="formPostEdit" class= "formPostEdit">
-                          <div id="btnPostCancelEdit" class = "btnPostCancelEdit" > X </div>
+                          <div class="btn-cerrar">
+                          <label for="btn-mod"> X <label>
+                          </div>
+                          <div class="editIntro">
+                          <p class="textIntro">Edita tu post</p>
+                          </div>
                           <input type="text"  id= "textPostInputEdit" class="textPostInputEdit" />
+                          <div class="btnSave">
                           <button type = "button" id="btnPostEdit" class = "btnPostEdit" type="submit"> Guardar</button>
-                  </form> 
-              </div> 
+                          </div>
+                  </form>  
               </div>
+              <label for="btn-mod" class="cerrar-modal"></label>
           </div> `;
-
-  /* document.getElementById('btnPostCancelEdit').addEventListener('click', () => {
-    window.location.hash = '#/nav';
-  }); */
   return editPostTemplate;
 };
