@@ -62,7 +62,7 @@ export const createUser = (email, password, name) => {
       if (user != null) {
         sendEmailVerification(auth.currentUser)
           .then(() => {
-            alert('Ingresa a tu correo y verifica tu email para poder acceder');
+            alert('Ingresa a tu correo y verifica tu email');
           })
           .catch((error) => {
           });
@@ -106,9 +106,7 @@ export const onAuth = () => {
       window.location.hash = '#/nav';
       const userId = user.uid;
     } else if (!user) {
-      if (window.location.hash !== '#/register') {
         out();
-      }
     }
   });
 };
@@ -165,6 +163,7 @@ export const editTemplate = async (postId) => {
   }
 };
 
+// Para dar like
 export const updateLikes = async (id, userIdentifier) => {
   const postRef = doc(db, 'post', id);
   const docSnap = await getDoc(postRef);
@@ -184,6 +183,7 @@ export const updateLikes = async (id, userIdentifier) => {
   }
 };
 
+// Para recomendar
 export const updateRecom = async (id, userIdentifier) => {
   const postRef = doc(db, 'post', id);
   const docSnap = await getDoc(postRef);

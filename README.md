@@ -7,7 +7,7 @@
 * [5. Test de usabilidad](#6-Test-de-usabilidad)
 * [6. Enlace página](#7-Enlace-página)
 
-## 1. Descripción juego Memorice The Simpsons
+## 1. Descripción Book Lovers
 
 Respondiendo a la necesidad de los usuarios de poder compartir sus experiencias de lecturas con personas que también les apasione lo mismo es que se creó la red social Book Lovers. Sus principales usaurios son amantes de la lectura y/o lectores ocasionales que buscan tanto compartir experiencias de lectura como también leer experiencia de otras personas, logrando así conexiones cercanas de personas con los mismos gustos, como también el expandir sus propios horizontes de lectura. 
 
