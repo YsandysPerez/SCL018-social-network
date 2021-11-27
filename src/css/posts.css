@@ -103,7 +103,6 @@ word-break: break-all;
 .btnLike, .btnRecom, .btnDelete {
     display: flex;
     flex-direction: row;
-    
 }
 
 .img {
@@ -118,6 +117,5 @@ word-break: break-all;
     justify-content: flex-end;
     grid-auto-columns: 70vw;
     margin-right: 30vw;
-    
 }
 }

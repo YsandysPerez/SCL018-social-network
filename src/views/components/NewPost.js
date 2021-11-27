@@ -9,7 +9,7 @@ export const newPost = () => {
   const newAddPost = `
   <input type="checkbox" id="btn-modal">
   <div class="desktopMain" id="desktopMain">
-  <div class="contentModal" id='contentModal'>
+    <div class="contentModal" id='contentModal'>
       <div class="newPostTitle" id="newPostTitle">
         <label for="btn-modal"><img src="./images/backArrow.png" alt="volver" id="backButton" class="backButton"></label>
         <p class="newPostUserName" id="newPostUserName"></p>

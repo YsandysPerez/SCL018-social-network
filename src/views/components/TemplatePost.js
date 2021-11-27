@@ -42,11 +42,11 @@ function PostCallback(posts) {
 
     if (element.userId === auth.currentUser.uid) {
       htmlBtn2 = `<button type = "button" class="btn" id='btnEdit'value="${element.id}">
-      <label for="btn-mod" class ="lbl-mod"><img class="img" src="./images/editar.gif"> </label>
-     </button>
-     <button type = "button" class="btn" id='btnDelete' value="${element.id}">
-       <img class="img" src="./images/basura.png">
-     </button>`;
+                 <label for="btn-mod" class ="lbl-mod"><img class="img" src="./images/editar.gif"> </label>
+                </button>
+                <button type = "button" class="btn" id='btnDelete' value="${element.id}">
+                  <img class="img" src="./images/basura.png">
+                </button>`;
     }
 
     postUser.innerHTML += htmlTemplate1 + htmlBtn2 + htmlTemplate3;

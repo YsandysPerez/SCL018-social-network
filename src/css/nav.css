@@ -54,7 +54,7 @@ align-items: center;
     
 }
 
-@media screen and (min-width: 851px) and (max-width: 1440px){
+@media screen and (min-width: 851px) and (max-width: 2560px){
       
     .logoWall{
         width: 40%;

@@ -86,6 +86,7 @@ body {
         height: 100vh;
     display: grid;
     grid-template-columns: auto auto;
+    grid-auto-rows: 100vh;
     grid-template-rows: 2fr;
 }
 
