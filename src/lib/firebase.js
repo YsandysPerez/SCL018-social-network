@@ -106,7 +106,7 @@ export const onAuth = () => {
       window.location.hash = '#/nav';
       const userId = user.uid;
     } else if (!user) {
-        out();
+      out();
     }
   });
 };
