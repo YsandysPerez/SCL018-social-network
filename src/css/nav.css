@@ -4,29 +4,72 @@ background: #E8CEB0;
 display: flex;
 justify-content: center;
 }
+
+
+.homeText {
+   color:#87544E; 
+   font-family: 'Quicksand', sans-serif;  
+   font-weight: 700;
+}
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+.logoWall{
+    width: 50%;
+}
+
+.icon{
+    height: 7vw;
+}
 .navWall{
 background: #F3E6D8;
 display: flex;
 justify-content: space-around;
 padding-top: 1vh;
 padding-bottom: 1vh;
-}
-@media screen and (max-width: 600px) and (orientation: portrait) {
-
-.logoWall{
-    width: 60%;
+align-items: center;
 }
 
-.icon{
-    height: 8vw;
+.homeText{
+    display: none;
 }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 601px) and (max-width: 850px) {
     .logoWall{
-        width: 20%;
+        width: 40%;
     }
     .icon{
-        height: 2vw;
+        height: 5vw;
     }
+    .navWall {
+        display: grid;
+        grid-auto-columns: 20vw;
+        position: fixed;
+        gap: 3vh;
+        margin: 7vw;
+        grid-template-columns: auto auto;
+        align-items: center;
+    }
+    
+}
+
+@media screen and (min-width: 851px) and (max-width: 2560px){
+      
+    .logoWall{
+        width: 40%;
+    }
+    .icon{
+        height: 5vw;
+    }
+    .navWall {
+        display: grid;
+        grid-auto-columns: 20vw;
+        position: fixed;
+        gap: 3vh;
+        margin: 7vw;
+        grid-template-columns: auto auto;
+        align-items: center;
+    }
+    
 }
