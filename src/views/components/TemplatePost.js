@@ -99,7 +99,8 @@ const postCallback = (posts) => {
   });
 
   return nav;
-}
+};
+
 export const showPost = () => {
   publishPost('post', postCallback);
 };

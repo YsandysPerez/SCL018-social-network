@@ -39,7 +39,8 @@ Todos los post que se realicen son de forma inmediata, como también lo es el ed
 
 * Prototipo de alta fidelidad realizado en Figma
 
-  ![foto6]( )
+  ![foto6](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/figma.png?raw=true)
+
 
 ## 4. Historias de usuarios
 
@@ -67,9 +68,9 @@ Historias de usuario
 
 ## 5. Test de usabilidad
 
-* 
+* https://www.loom.com/share/ab309add7b704476a3a5236fd16df42f
 
-* 
+* https://www.loom.com/share/df56d04d023046528e285f12f55ab51d
 ## 6. Enlace página
 
 * 
