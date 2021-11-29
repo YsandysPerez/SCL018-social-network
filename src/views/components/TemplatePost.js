@@ -84,8 +84,7 @@ const postCallback = (posts) => {
   likeBtn.forEach((btnL) => {
     btnL.addEventListener('click', () => {
       const postId = btnL.value;
-      const userId = auth.currentUser.uid;
-      updateLikes(postId, userId);
+      updateLikes(postId);
     });
   });
 
