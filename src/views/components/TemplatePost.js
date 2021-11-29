@@ -8,7 +8,7 @@ import {
 } from '../../lib/firebase.js';
 import { editPost } from './TemplateEditPost.js';
 
-function PostCallback(posts) {
+const postCallback = (posts) => {
   const nav = document.getElementById('feed');
   nav.innerHTML = '';
   const prueba = (element) => {
@@ -22,13 +22,13 @@ function PostCallback(posts) {
      </div>
      <div class="imgPost">
        <div class="btnLike">
-       <button id="btnLike" class="btn" value="${element.id}">
-       <img class="img" id="btnLike" src="./images/btnlike.png">
+       <button id="btnLike" class="btn like" value="${element.id}">
+       <img class="img" src="./images/btnlike.png">
        </button>
        <p class="number" id="counter-likes"> ${element.likesCounter} me gusta</p>
         </div>
         <div class="btnRecom">
-        <button id="btnRecom" class="btn" value="${element.id}">
+        <button id="btnRecom" class="btn recom" value="${element.id}">
         <img class="img" src="./images/btnrecom.png">
         <p class="number"> ${element.recomCounter} recomiendo </p> 
         </div>
@@ -80,17 +80,16 @@ function PostCallback(posts) {
   }));
 
   // Para dar Like
-  const likeBtn = nav.querySelectorAll('#btnLike');
+  const likeBtn = nav.querySelectorAll('.like');
   likeBtn.forEach((btnL) => {
     btnL.addEventListener('click', () => {
       const postId = btnL.value;
-      const userId = auth.currentUser.uid;
-      updateLikes(postId, userId);
+      updateLikes(postId);
     });
   });
 
   // Para recomendar
-  const recomBtn = nav.querySelectorAll('#btnRecom');
+  const recomBtn = nav.querySelectorAll('.recom');
   recomBtn.forEach((btnR) => {
     btnR.addEventListener('click', () => {
       const postId = btnR.value;
@@ -102,5 +101,5 @@ function PostCallback(posts) {
   return nav;
 }
 export const showPost = () => {
-  publishPost('post', PostCallback);
+  publishPost('post', postCallback);
 };

@@ -164,7 +164,8 @@ export const editTemplate = async (postId) => {
 };
 
 // Para dar like
-export const updateLikes = async (id, userIdentifier) => {
+export const updateLikes = async (id) => {
+  const userIdentifier = auth.currentUser.uid;
   const postRef = doc(db, 'post', id);
   const docSnap = await getDoc(postRef);
   const postData = docSnap.data();
