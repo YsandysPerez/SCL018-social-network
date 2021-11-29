@@ -36,7 +36,8 @@ Todos los post que se realicen son de forma inmediata, como también lo es el ed
 
  * [Click para ver Propotitpo de baja fidelidad 2](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/bajaFidelidad2.jpeg?raw=true )
 
-* Prototipo de alta fidelidad realizado en figma
+
+* Prototipo de alta fidelidad realizado en Figma
 
   ![foto6]( )
 
