@@ -28,7 +28,7 @@ const postCallback = (posts) => {
        <p class="number" id="counter-likes"> ${element.likesCounter} me gusta</p>
         </div>
         <div class="btnRecom">
-        <button id="btnRecom" class="btn recom" value="${element.id}">  
+        <button id="btnRecom" class="btn recom" value="${element.id}">
         <img class="img" src="./images/btnrecom.png">
         <p class="number"> ${element.recomCounter} recomiendo </p> 
         </div>
@@ -84,8 +84,7 @@ const postCallback = (posts) => {
   likeBtn.forEach((btnL) => {
     btnL.addEventListener('click', () => {
       const postId = btnL.value;
-      const userId = auth.currentUser.uid;
-      updateLikes(postId, userId);
+      updateLikes(postId);
     });
   });
 
