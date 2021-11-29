@@ -29,7 +29,6 @@ Todos los post que se realicen son de forma inmediata, como también lo es el ed
 
   ![foto5](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/escritorioRegister.png?raw=true)
 
-  ![foto6](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/mobile.png?raw=true)
  
 ## 3. Prototipos
 
@@ -37,13 +36,10 @@ Todos los post que se realicen son de forma inmediata, como también lo es el ed
 
  * [Click para ver Propotitpo de baja fidelidad 2](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/bajaFidelidad2.jpeg?raw=true )
 
-* Prototipo de alta fidelidad
+* Prototipo de alta fidelidad realizado en Figma
 
-  ![foto7]( )
+  ![foto6](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/figma.png?raw=true)
 
-* Prototipo de alta fidelidad
-
-  ![foto8]( )
 
 ## 4. Historias de usuarios
 
@@ -51,29 +47,29 @@ Historias de usuario
 
 * Hisoria de Usuario N°1
 
-  ![foto9](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario1.png?raw=true)
+  ![foto7](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario1.png?raw=true)
 
 * Hisoria de Usuario N°2
 
-  ![foto10](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario2.png?raw=true)
+  ![foto8](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario2.png?raw=true)
 
 * Hisoria de Usuario N°3
 
-  ![foto11](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario3.png?raw=true)
+  ![foto9](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario3.png?raw=true)
 
 * Hisoria de Usuario N°4
 
-  ![foto12](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario4.png?raw=true)
+  ![foto10](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario4.png?raw=true)
 
 * Hisoria de Usuario N°5
 
-  ![foto13](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario5.png?raw=true)
+  ![foto11](https://github.com/Fritza02/SCL018-social-network/blob/fritza1/src/imagesReadme/historiaUsuario5.png?raw=true)
 
 ## 5. Test de usabilidad
 
-* 
+* https://www.loom.com/share/ab309add7b704476a3a5236fd16df42f
 
-* 
+* https://www.loom.com/share/df56d04d023046528e285f12f55ab51d
 ## 6. Enlace página
 
 * 
